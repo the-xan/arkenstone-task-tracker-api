@@ -1,0 +1,11 @@
+---
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/arkenstone-task-tracker
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
