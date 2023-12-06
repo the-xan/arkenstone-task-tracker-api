@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="4efd1e8c-704f-489f-9f7f-7aef1f9bde5d">
+    <data-source source="LOCAL" name="arkenstone-task-tracker@localhost" uuid="0f74e4c1-c3ec-428e-8bc7-ae771b880dd7">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/arkenstone-task-tracker</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
