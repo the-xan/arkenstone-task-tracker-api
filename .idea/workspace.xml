@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1028cacd-369a-4010-a3b6-9c668f22f587" name="Changes" comment="add new project">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/ProjectEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskStateEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="1028cacd-369a-4010-a3b6-9c668f22f587" name="Changes" comment="unknown file">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/controllers/ProjectController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/TaskDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/TaskStateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/ProjectDtoFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskDtoFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskStateDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7/storage_v2/_src_/database/arkenstone-task-tracker.G7Gb-A/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7/storage_v2/_src_/database/arkenstone-task-tracker.G7Gb-A/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskStateEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskStateEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +31,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -37,38 +44,46 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2Z7rjFVgPuPPfY4z0vcOBZ9rn8O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/timai/IdeaProjects/niffler-st3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/timai/IdeaProjects/arkenstone-task-tracker-api/src/main/java/org/example/Main.java",
-    "spring.configuration.checksum": "74d70f7b8b25edf4bb202f12b060d372",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/timai/IdeaProjects/niffler-st3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/timai/IdeaProjects/arkenstone-task-tracker-api/src/main/java/org/example/Main.java&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;74d70f7b8b25edf4bb202f12b060d372&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="the.xan.arkenstone.task.tracker.api.factories" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -100,6 +115,9 @@
       <list>
         <item itemvalue="Spring Boot.Application" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Spring Boot.Application" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Spring Boot.Application" />
       </list>
     </recent_temporary>
   </component>
@@ -113,6 +131,7 @@
       <updated>1701784097543</updated>
       <workItem from="1701784098522" duration="6476000" />
       <workItem from="1701837161692" duration="4850000" />
+      <workItem from="1701922863081" duration="5118000" />
     </task>
     <task id="LOCAL-00001" summary="add new project">
       <option name="closed" value="true" />
@@ -138,7 +157,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add new project" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new project" />
+    <MESSAGE value="add entities and repos" />
+    <MESSAGE value="unknown file" />
+    <option name="LAST_COMMIT_MESSAGE" value="unknown file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
