@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1028cacd-369a-4010-a3b6-9c668f22f587" name="Changes" comment="add new project">
+    <list default="true" id="1028cacd-369a-4010-a3b6-9c668f22f587" name="Changes" comment="project changes">
       <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/ProjectEntity.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskEntity.java" afterDir="false" />
@@ -21,6 +21,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -60,6 +72,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/timai/IdeaProjects/arkenstone-task-tracker-api/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "spring.configuration.checksum": "74d70f7b8b25edf4bb202f12b060d372",
     "vue.rearranger.settings.migration": "true"
   },
