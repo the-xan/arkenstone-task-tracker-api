@@ -10,12 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Log4j2
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-
     public ResponseEntity<Object> exception(Exception exception, WebRequest request) throws Exception {
         log.error("Exception during execution of application", exception);
         return handleException(exception, request);
     }
-
-
-
 }

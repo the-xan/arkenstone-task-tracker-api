@@ -4,10 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import the.xan.arkenstone.task.tracker.api.dto.AskDto;
 import the.xan.arkenstone.task.tracker.api.dto.ProjectDto;
 import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
 import the.xan.arkenstone.task.tracker.api.exceptions.NotFoundException;
@@ -15,7 +13,11 @@ import the.xan.arkenstone.task.tracker.api.factories.ProjectDtoFactory;
 import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
 import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
@@ -26,9 +28,25 @@ public class ProjectController {
 
     ProjectRepository projectRepository;
 
+    private final static String FETCH_PROJECT = "/api/projects";
     private final static String CREATE_PROJECT = "/api/projects";
     private final static String EDIT_PROJECT = "/api/projects/{project_id}";
+    private final static String DELETE_PROJECT = "/api/projects/{project_id}";
 
+    @GetMapping(FETCH_PROJECT)
+    public List<ProjectDto> fetchProject(@RequestParam(value = "prefix_name", required = false)
+                                         Optional<String> optionalPrefixName) {
+
+        optionalPrefixName = optionalPrefixName.filter(prefixName -> !prefixName.trim().isEmpty());
+
+        Stream<ProjectEntity> projectStream = optionalPrefixName
+                .map(projectRepository::streamAllByNameStartsWithIgnoreCase)
+                .orElseGet(projectRepository::streamAll);
+
+        return projectStream
+                .map(projectDtoFactory::makeProjectDto)
+                .collect(Collectors.toList());
+    }
     @PostMapping(CREATE_PROJECT)
     public ProjectDto createProject(@RequestParam String name) {
 
@@ -50,7 +68,7 @@ public class ProjectController {
         return projectDtoFactory.makeProjectDto(project);
     }
 
-    @PostMapping(EDIT_PROJECT)
+    @PatchMapping (EDIT_PROJECT)
     public ProjectDto editPatch(@PathVariable("project_id") Long projectId,
                                   @RequestParam String name) {
 
@@ -58,11 +76,7 @@ public class ProjectController {
             throw new BadRequestException("New name can`t be empty");
         }
 
-        ProjectEntity project = projectRepository
-                .findById(projectId)
-                .orElseThrow(() ->
-                    new NotFoundException(String.format("Project with \"%s\" id, doesn`t exist", projectId))
-                );
+        ProjectEntity project = getProjectOrThrowException(projectId);
 
         projectRepository
                 .findByName(name)
@@ -77,4 +91,23 @@ public class ProjectController {
 
         return projectDtoFactory.makeProjectDto(project);
     }
+    @DeleteMapping(DELETE_PROJECT)
+    public AskDto deleteProject(@PathVariable("project_id") Long projectId) {
+
+        getProjectOrThrowException(projectId);
+
+        projectRepository.deleteById(projectId);
+
+        return AskDto.makeDefault(true);
+    }
+
+    private ProjectEntity getProjectOrThrowException(Long projectId) {
+       return projectRepository
+                .findById(projectId)
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Project with \"%s\" id, doesn`t exist", projectId))
+                );
+    }
+
 }

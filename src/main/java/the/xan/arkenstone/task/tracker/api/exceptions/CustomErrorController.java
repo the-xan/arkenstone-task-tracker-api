@@ -1,6 +1,7 @@
 package the.xan.arkenstone.task.tracker.api.exceptions;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -12,11 +13,12 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    private final static String PATH = "error";
+    private final static String PATH = "/error";
 
     ErrorAttributes errorAttributes;
 
