@@ -10,7 +10,5 @@ public interface TaskStateRepository extends JpaRepository<TaskStateEntity, Long
     Optional<TaskStateEntity> findByName(String name);
 
     @Query("SELECT COALESCE(MAX(c.ordinal), 0) FROM TaskStateEntity c")
-    Integer findMaxOrderIndex();
-
-
+    int findMaxOrdinalValue();
 }
