@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36a74596-58c9-4226-9d93-bcbf6b08695d" name="Changes" comment="add part of service layer">
+    <list default="true" id="36a74596-58c9-4226-9d93-bcbf6b08695d" name="Changes" comment="add more methods">
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/controllers/TaskStateController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/controllers/helpers/ControllerHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7/storage_v2/_src_/database/arkenstone-task-tracker.G7Gb-A/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0f74e4c1-c3ec-428e-8bc7-ae771b880dd7/storage_v2/_src_/database/arkenstone-task-tracker.G7Gb-A/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/controllers/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/controllers/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/ProjectDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/ProjectDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/TaskStateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/dto/TaskStateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/exceptions/CustomErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/exceptions/CustomErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/exceptions/CustomExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/exceptions/CustomExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/ProjectDtoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/ProjectDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskDtoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskStateDtoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/api/factories/TaskStateDtoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/ProjectEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/ProjectEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskStateEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/entities/TaskStateEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/repositories/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/repositories/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/repositories/TaskStateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/the/xan/arkenstone/task/tracker/store/repositories/TaskStateRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,14 +39,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="arkenstone-task-tracker-api" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -61,9 +77,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/timai/IdeaProjects/arkenstone-task-tracker-api&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -71,6 +92,7 @@
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;74d70f7b8b25edf4bb202f12b060d372&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -92,10 +114,30 @@
       <option name="presentableId" value="Default" />
       <updated>1702965269785</updated>
       <workItem from="1702965273667" duration="8950000" />
+      <workItem from="1703229517198" duration="58000" />
+      <workItem from="1703230212209" duration="925000" />
+      <workItem from="1703502120623" duration="853000" />
+      <workItem from="1703660163652" duration="22000" />
+      <workItem from="1704257307383" duration="635000" />
+      <workItem from="1704258338564" duration="12995000" />
+      <workItem from="1704351580702" duration="14909000" />
     </task>
+    <task id="LOCAL-00001" summary="add more methods">
+      <option name="closed" value="true" />
+      <created>1703160574320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703160574320</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add more methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="add more methods" />
   </component>
 </project>

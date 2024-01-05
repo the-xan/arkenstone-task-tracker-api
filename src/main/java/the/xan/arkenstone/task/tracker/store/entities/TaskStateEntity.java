@@ -22,7 +22,7 @@ public class TaskStateEntity {
 
     Long ordinal;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     String name;
 
     @Builder.Default

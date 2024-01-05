@@ -21,7 +21,8 @@ public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
-    @Column(unique = true)
+
+    //@Column(unique = true)
     String name;
 
     @Builder.Default
@@ -33,6 +34,6 @@ public class ProjectEntity {
     @Builder.Default
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     @OneToMany(fetch = FetchType.LAZY)
-    List<TaskStateEntity> taskStateEntities = new ArrayList<>();
+    List<TaskStateEntity> taskStates = new ArrayList<>();
 
 }

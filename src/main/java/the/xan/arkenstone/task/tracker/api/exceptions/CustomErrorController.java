@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class CustomErrorController implements ErrorController {
 
     ErrorAttributes errorAttributes;
 
-    @PostMapping(CustomErrorController.PATH)
+    @RequestMapping(CustomErrorController.PATH)
     public ResponseEntity<ErrorDto> error(WebRequest request) {
         Map<String, Object> attributes = errorAttributes.getErrorAttributes(
                 request,
