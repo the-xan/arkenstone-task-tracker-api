@@ -35,10 +35,7 @@ import java.util.stream.Stream;
 @RestController
 public class ProjectController {
 
-    MyTestService myTestService;
-
     ProjectService projectService;
-
 
     ProjectDtoFactory projectDtoFactory;
 
@@ -52,7 +49,7 @@ public class ProjectController {
     private final static String DELETE_PROJECT = "/api/projects/{project_id}";
 
     @GetMapping(FETCH_PROJECT)
-    public ResponseEntity<List<ProjectDto>> fetchProject(
+    public List<ProjectDto> fetchProject( //ResponseEntity<List<ProjectDto>> fetchProject(
             @RequestParam(value = "prefix_name", required = false) Optional<String> optionalPrefixName
     ) {
         optionalPrefixName = optionalPrefixName.filter(prefixName -> !prefixName.trim().isEmpty());
