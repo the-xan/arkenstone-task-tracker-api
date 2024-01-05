@@ -31,8 +31,6 @@ public class TaskStateController {
 
     private final static String GET_TASK_STATES = "/api/projects/{project_id}/task-states";
     private final static String CREATE_TASK_STATES = "/api/projects/{project_id}/task-states";
-    private final static String EDIT_PROJECT = "/api/projects/{project_id}";
-    private final static String DELETE_PROJECT = "/api/projects/{project_id}";
 
     @GetMapping(GET_TASK_STATES)
     public List<TaskStateDto> getTaskStates(@PathVariable(name = "project_id") Long projectId) {
@@ -63,16 +61,12 @@ public class TaskStateController {
                     throw new BadRequestException(String.format("Task state with name \"%s\" already exists", taskStateName));
                 });
 
-        int ordinal = 0;
-
-        if (!project.getTaskStates().isEmpty()) {
-            ordinal = taskStateRepository.findMaxOrdinalValue() + 1;
-        }
-
         TaskStateEntity taskState = taskStateRepository.saveAndFlush(
                 TaskStateEntity.builder()
                         .name(taskStateName)
-                        .ordinal(ordinal)
+                        .ordinal(taskStateRepository
+                                .findMaxOrdinalByProjectId(projectId)
+                                .orElse(0))
                         .project(project)
                         .build());
 
