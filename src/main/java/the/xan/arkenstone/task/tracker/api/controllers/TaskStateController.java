@@ -53,12 +53,6 @@ public class TaskStateController {
             throw new BadRequestException("Task state name can`t be empty");
         }
 
-        // разрулить вопрос с ordinal
-
-
-        // сделать так, чтобы название таск стейта было уникальным в рамках проекта
-
-        // Нашли проект
         ProjectEntity project = controllerHelper.getProjectOrThrowException(projectId);
 
         project.getTaskStates()
@@ -69,16 +63,19 @@ public class TaskStateController {
                     throw new BadRequestException(String.format("Task state with name \"%s\" already exists", taskStateName));
                 });
 
+        int ordinal = 0;
+
+        if (!project.getTaskStates().isEmpty()) {
+            ordinal = taskStateRepository.findMaxOrdinalValue() + 1;
+        }
 
         TaskStateEntity taskState = taskStateRepository.saveAndFlush(
                 TaskStateEntity.builder()
                         .name(taskStateName)
-
+                        .ordinal(ordinal)
+                        .project(project)
                         .build());
 
-
-
-        return null;
-
+        return taskStateDtoFactory.makeTaskStateDto(taskState);
     }
 }
