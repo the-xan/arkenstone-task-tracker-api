@@ -61,12 +61,16 @@ public class TaskStateController {
                     throw new BadRequestException(String.format("Task state with name \"%s\" already exists", taskStateName));
                 });
 
+        int ordinal = 0;
+
+        if (!project.getTaskStates().isEmpty()) {
+            ordinal = taskStateRepository.findMaxOrdinalByProjectId(projectId) + 1;
+        }
+
         TaskStateEntity taskState = taskStateRepository.saveAndFlush(
                 TaskStateEntity.builder()
                         .name(taskStateName)
-                        .ordinal(taskStateRepository
-                                .findMaxOrdinalByProjectId(projectId)
-                                .orElse(0))
+                        .ordinal(ordinal)
                         .project(project)
                         .build());
 
