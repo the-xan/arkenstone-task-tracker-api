@@ -1,10 +1,10 @@
-package the.xan.arkenstone.task.tracker.api.factories;
+package the.xan.arkenstone.task.tracker.api.model.factories;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
-import the.xan.arkenstone.task.tracker.api.dto.TaskStateDto;
+import the.xan.arkenstone.task.tracker.api.model.dto.TaskStateDto;
 import the.xan.arkenstone.task.tracker.store.entities.TaskStateEntity;
 
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ public class TaskStateDtoFactory {
 
         return TaskStateDto.builder()
                 .id(entity.getId())
-                .ordinal(entity.getOrdinal())
+                .ordinal((long) entity.getOrdinal())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .tasks(

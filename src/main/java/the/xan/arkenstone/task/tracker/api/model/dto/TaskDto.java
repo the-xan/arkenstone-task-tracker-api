@@ -1,4 +1,4 @@
-package the.xan.arkenstone.task.tracker.api.dto;
+package the.xan.arkenstone.task.tracker.api.model.dto;
 
 
 import lombok.*;

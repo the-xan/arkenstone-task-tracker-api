@@ -1,7 +1,7 @@
-package the.xan.arkenstone.task.tracker.api.factories;
+package the.xan.arkenstone.task.tracker.api.model.factories;
 
 import org.springframework.stereotype.Component;
-import the.xan.arkenstone.task.tracker.api.dto.TaskDto;
+import the.xan.arkenstone.task.tracker.api.model.dto.TaskDto;
 import the.xan.arkenstone.task.tracker.store.entities.TaskEntity;
 @Component
 public class TaskDtoFactory {

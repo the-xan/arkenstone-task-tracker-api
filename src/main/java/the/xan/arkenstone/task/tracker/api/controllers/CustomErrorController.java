@@ -1,4 +1,4 @@
-package the.xan.arkenstone.task.tracker.api.exceptions;
+package the.xan.arkenstone.task.tracker.api.controllers;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +8,9 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import the.xan.arkenstone.task.tracker.api.exceptions.ErrorDto;
 
 import java.util.Map;
 
