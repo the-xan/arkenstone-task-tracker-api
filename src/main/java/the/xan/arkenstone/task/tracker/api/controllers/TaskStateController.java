@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import the.xan.arkenstone.task.tracker.api.controllers.helpers.ControllerHelper;
 import the.xan.arkenstone.task.tracker.api.dto.TaskStateDto;
 import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
+import the.xan.arkenstone.task.tracker.api.exceptions.NotFoundException;
 import the.xan.arkenstone.task.tracker.api.factories.TaskStateDtoFactory;
 import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
 import the.xan.arkenstone.task.tracker.store.entities.TaskStateEntity;
@@ -31,6 +32,7 @@ public class TaskStateController {
 
     private final static String GET_TASK_STATES = "/api/projects/{project_id}/task-states";
     private final static String CREATE_TASK_STATES = "/api/projects/{project_id}/task-states";
+    private final static String EDIT_TASK_STATE_ORDINAL = "/api/projects/{project_id}/task-states/{task_state_id}";
 
     @GetMapping(GET_TASK_STATES)
     public List<TaskStateDto> getTaskStates(@PathVariable(name = "project_id") Long projectId) {
@@ -76,4 +78,38 @@ public class TaskStateController {
 
         return taskStateDtoFactory.makeTaskStateDto(taskState);
     }
+
+    @PatchMapping(EDIT_TASK_STATE_ORDINAL)
+    public List<TaskStateDto> moveTaskState(@PathVariable(value = "project_id") Long projectId,
+                                            @PathVariable(value = "task_state_id") Long taskStateId,
+                                            @RequestParam(name = "task_state_ordinal") Integer ordinal) {
+
+        // проверить что переданный порядковый номер не пустой
+        if (ordinal == null) {
+            throw new BadRequestException("New task state ordinal can`t be null!");
+        }
+
+        // проверить что проект существует
+        ProjectEntity project = controllerHelper.getProjectOrThrowException(projectId);
+
+        // проверить что переданный таск стейт существует в рамках проекта
+        project.getTaskStates()
+                .stream()
+                .filter(taskState -> Objects.equals(taskState.getId(), taskStateId))
+                .findAny()
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Project with \"%s\" id, doesn`t contains task state with \"%s\" id",
+                                        projectId, taskStateId))
+                );
+
+
+        // присвоить новый порядковый номер переданному таск стейту
+        // обновить порядковый номер у других таск стейтов
+
+
+        return null;
+    }
+
+
 }

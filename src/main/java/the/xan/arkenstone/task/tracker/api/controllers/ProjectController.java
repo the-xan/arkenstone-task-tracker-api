@@ -4,6 +4,7 @@ package the.xan.arkenstone.task.tracker.api.controllers;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,8 @@ import the.xan.arkenstone.task.tracker.api.dto.AskDto;
 import the.xan.arkenstone.task.tracker.api.dto.ProjectDto;
 import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
 import the.xan.arkenstone.task.tracker.api.factories.ProjectDtoFactory;
+import the.xan.arkenstone.task.tracker.api.services.MyTestService;
+import the.xan.arkenstone.task.tracker.api.services.ProjectService;
 import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
 import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
 
@@ -32,6 +35,11 @@ import java.util.stream.Stream;
 @RestController
 public class ProjectController {
 
+    MyTestService myTestService;
+
+    ProjectService projectService;
+
+
     ProjectDtoFactory projectDtoFactory;
 
     ProjectRepository projectRepository;
@@ -44,39 +52,20 @@ public class ProjectController {
     private final static String DELETE_PROJECT = "/api/projects/{project_id}";
 
     @GetMapping(FETCH_PROJECT)
-    public List<ProjectDto> fetchProject(@RequestParam(value = "prefix_name", required = false)
-                                         Optional<String> optionalPrefixName) {
-
+    public ResponseEntity<List<ProjectDto>> fetchProject(
+            @RequestParam(value = "prefix_name", required = false) Optional<String> optionalPrefixName
+    ) {
         optionalPrefixName = optionalPrefixName.filter(prefixName -> !prefixName.trim().isEmpty());
 
         Stream<ProjectEntity> projectStream = optionalPrefixName
                 .map(projectRepository::streamAllByNameStartsWithIgnoreCase)
                 .orElseGet(projectRepository::streamAllBy);
-
-        return projectStream
-                .map(projectDtoFactory::makeProjectDto)
-                .collect(Collectors.toList());
+        return projectStream.map(projectDtoFactory::makeProjectDto).collect(Collectors.toList());
     }
 
     @PostMapping(CREATE_PROJECT)
     public ProjectDto createProject(@RequestParam String name) {
-
-        if (name.trim().isEmpty()) {
-            throw new BadRequestException("Name can`t be empty");
-        }
-
-        projectRepository.findByName(name)
-                .ifPresent(projectEntity -> {
-                    throw new BadRequestException(String.format("Project \"%s\" already exists", name));
-                });
-
-        ProjectEntity project = projectRepository.saveAndFlush(
-                ProjectEntity.builder()
-                        .name(name)
-                        .build()
-        );
-
-        return projectDtoFactory.makeProjectDto(project);
+        return projectService.createProject(name);
     }
 
     @PatchMapping(EDIT_PROJECT)
