@@ -1,6 +1,5 @@
 package the.xan.arkenstone.task.tracker.api.controllers;
 
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Transactional
 @RestController
 public class TaskStateController {
 
@@ -103,8 +101,11 @@ public class TaskStateController {
                                         projectId, taskStateId))
                 );
 
-
         // присвоить новый порядковый номер переданному таск стейту
+
+
+
+
         // обновить порядковый номер у других таск стейтов
 
 
