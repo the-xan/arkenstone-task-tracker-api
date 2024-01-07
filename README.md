@@ -1,0 +1,1 @@
+docker run --name niffler-all -p 5432:5432 -e POSTGRES_PASSWORD=secret -v niffler-st3:/var/lib/postgresql/data -d postgres:15.1

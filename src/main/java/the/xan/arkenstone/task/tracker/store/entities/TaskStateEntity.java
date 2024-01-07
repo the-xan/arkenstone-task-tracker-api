@@ -20,13 +20,16 @@ public class TaskStateEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
-    Long ordinal;
+    int ordinal;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     String name;
 
     @Builder.Default
     Instant createdAt = Instant.now();
+
+    @ManyToOne
+    ProjectEntity project;
 
     @JoinColumn(name = "task_state_id", referencedColumnName = "id")
     @Builder.Default

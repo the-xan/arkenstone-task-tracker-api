@@ -1,80 +1,48 @@
 package the.xan.arkenstone.task.tracker.api.controllers;
 
-import jakarta.transaction.Transactional;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import the.xan.arkenstone.task.tracker.api.dto.ProjectDto;
-import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
-import the.xan.arkenstone.task.tracker.api.exceptions.NotFoundException;
-import the.xan.arkenstone.task.tracker.api.factories.ProjectDtoFactory;
-import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
-import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
 
-import java.util.Objects;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+import the.xan.arkenstone.task.tracker.api.model.dto.AskDto;
+import the.xan.arkenstone.task.tracker.api.model.dto.ProjectDto;
+import the.xan.arkenstone.task.tracker.api.services.ProjectServiceImpl;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Transactional
 @RestController
 public class ProjectController {
-    ProjectDtoFactory projectDtoFactory;
 
-    ProjectRepository projectRepository;
+    private final ProjectServiceImpl projectService;
 
+    private final static String FETCH_PROJECT = "/api/projects";
     private final static String CREATE_PROJECT = "/api/projects";
     private final static String EDIT_PROJECT = "/api/projects/{project_id}";
+    private final static String DELETE_PROJECT = "/api/projects/{project_id}";
+
+    @GetMapping(FETCH_PROJECT)
+    public List<ProjectDto> fetchProject( // ----> почитать за ResponseEntity<>
+            @RequestParam(value = "prefix_name", required = false) Optional<String> optionalPrefixName
+    ) {
+        return projectService.fetchProject(optionalPrefixName);
+    }
 
     @PostMapping(CREATE_PROJECT)
     public ProjectDto createProject(@RequestParam String name) {
-
-        if(name.trim().isEmpty()) {
-            throw new BadRequestException("Name can`t be empty");
-        }
-
-        projectRepository.findByName(name)
-                .ifPresent(projectEntity -> {
-                        throw new BadRequestException(String.format("Project \"%s\" already exists", name));
-                 });
-
-        ProjectEntity project = projectRepository.saveAndFlush(
-                ProjectEntity.builder()
-                        .name(name)
-                        .build()
-        );
-
-        return projectDtoFactory.makeProjectDto(project);
+        return projectService.createProject(name);
     }
 
-    @PostMapping(EDIT_PROJECT)
-    public ProjectDto editPatch(@PathVariable("project_id") Long projectId,
+    @PatchMapping(EDIT_PROJECT)
+    public ProjectDto editProject(@PathVariable("project_id") Long projectId,
                                   @RequestParam String name) {
+        return projectService.editProject(projectId, name);
+    }
 
-        if(name.trim().isEmpty()) {
-            throw new BadRequestException("New name can`t be empty");
-        }
-
-        ProjectEntity project = projectRepository
-                .findById(projectId)
-                .orElseThrow(() ->
-                    new NotFoundException(String.format("Project with \"%s\" id, doesn`t exist", projectId))
-                );
-
-        projectRepository
-                .findByName(name)
-                .filter(anotherProject -> !Objects.equals(anotherProject.getId(), projectId))
-                .ifPresent(anotherProject  -> {
-                    throw new BadRequestException(String.format("Project \"%s\" already exists", name));
-                });
-
-        project.setName(name);
-
-        projectRepository.saveAndFlush(project);
-
-        return projectDtoFactory.makeProjectDto(project);
+    @DeleteMapping(DELETE_PROJECT)
+    public AskDto deleteProject(@PathVariable("project_id") Long projectId) {
+        return projectService.deleteProject(projectId);
     }
 }

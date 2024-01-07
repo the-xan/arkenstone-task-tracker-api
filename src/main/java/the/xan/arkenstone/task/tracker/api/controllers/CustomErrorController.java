@@ -1,26 +1,29 @@
-package the.xan.arkenstone.task.tracker.api.exceptions;
+package the.xan.arkenstone.task.tracker.api.controllers;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import the.xan.arkenstone.task.tracker.api.exceptions.ErrorDto;
 
 import java.util.Map;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    private final static String PATH = "error";
+    private final static String PATH = "/error";
 
     ErrorAttributes errorAttributes;
 
-    @PostMapping(CustomErrorController.PATH)
+    @RequestMapping(CustomErrorController.PATH)
     public ResponseEntity<ErrorDto> error(WebRequest request) {
         Map<String, Object> attributes = errorAttributes.getErrorAttributes(
                 request,

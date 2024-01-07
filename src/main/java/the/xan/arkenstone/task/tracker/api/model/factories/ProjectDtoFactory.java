@@ -1,7 +1,7 @@
-package the.xan.arkenstone.task.tracker.api.factories;
+package the.xan.arkenstone.task.tracker.api.model.factories;
 
 import org.springframework.stereotype.Component;
-import the.xan.arkenstone.task.tracker.api.dto.ProjectDto;
+import the.xan.arkenstone.task.tracker.api.model.dto.ProjectDto;
 import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
 @Component
 public class ProjectDtoFactory {
@@ -11,6 +11,7 @@ public class ProjectDtoFactory {
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
                 .build();
 
     }
