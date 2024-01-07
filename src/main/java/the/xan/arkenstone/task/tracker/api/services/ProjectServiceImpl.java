@@ -1,7 +1,5 @@
 package the.xan.arkenstone.task.tracker.api.services;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import the.xan.arkenstone.task.tracker.api.controllers.helpers.ControllerHelper;
@@ -21,11 +19,21 @@ import java.util.stream.Stream;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-    ProjectDtoFactory projectDtoFactory;
 
-    ProjectRepository projectRepository;
+    final ProjectDtoFactory projectDtoFactory;
 
-    ControllerHelper controllerHelper;
+    final ProjectRepository projectRepository;
+
+    final ControllerHelper controllerHelper;
+
+    @Autowired
+    public ProjectServiceImpl(ProjectDtoFactory projectDtoFactory,
+                              ProjectRepository projectRepository,
+                              ControllerHelper controllerHelper) {
+        this.projectDtoFactory = projectDtoFactory;
+        this.projectRepository = projectRepository;
+        this.controllerHelper = controllerHelper;
+    }
 
     @Override
     public ProjectDto createProject(String name) {
