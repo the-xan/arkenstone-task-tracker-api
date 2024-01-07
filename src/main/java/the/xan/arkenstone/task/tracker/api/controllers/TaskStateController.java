@@ -3,6 +3,7 @@ package the.xan.arkenstone.task.tracker.api.controllers;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import the.xan.arkenstone.task.tracker.api.controllers.helpers.ControllerHelper;
 import the.xan.arkenstone.task.tracker.api.model.dto.TaskStateDto;
@@ -77,13 +78,14 @@ public class TaskStateController {
         return taskStateDtoFactory.makeTaskStateDto(taskState);
     }
 
-    @PatchMapping(EDIT_TASK_STATE_ORDINAL)
-    public List<TaskStateDto> moveTaskState(@PathVariable(value = "project_id") Long projectId,
+    @Transactional
+    @PatchMapping (EDIT_TASK_STATE_ORDINAL)
+    public TaskStateDto updateTaskStateOrdinal(@PathVariable(value = "project_id") Long projectId,
                                             @PathVariable(value = "task_state_id") Long taskStateId,
-                                            @RequestParam(name = "task_state_ordinal") Integer ordinal) {
+                                            @RequestParam(name = "task_state_ordinal") Integer newOrdinal) {
 
         // проверить что переданный порядковый номер не пустой
-        if (ordinal == null) {
+        if (newOrdinal == null) {
             throw new BadRequestException("New task state ordinal can`t be null!");
         }
 
@@ -91,9 +93,9 @@ public class TaskStateController {
         ProjectEntity project = controllerHelper.getProjectOrThrowException(projectId);
 
         // проверить что переданный таск стейт существует в рамках проекта
-        project.getTaskStates()
+        TaskStateEntity taskState = project.getTaskStates()
                 .stream()
-                .filter(taskState -> Objects.equals(taskState.getId(), taskStateId))
+                .filter(sameTaskState -> Objects.equals(sameTaskState.getId(), taskStateId))
                 .findAny()
                 .orElseThrow(() ->
                         new NotFoundException(
@@ -101,16 +103,23 @@ public class TaskStateController {
                                         projectId, taskStateId))
                 );
 
-        // присвоить новый порядковый номер переданному таск стейту
+        // Присвоение нового порядкового номера
+        int currentOrdinal = taskState.getOrdinal();
 
+        if (newOrdinal < 0 || newOrdinal > taskStateRepository.findMaxOrdinalByProjectId(projectId) || taskState.getOrdinal() == newOrdinal) {
+            throw new BadRequestException("Invalid ordinal");
+        }
 
+        if (newOrdinal < currentOrdinal) {
+            taskStateRepository.incrementOrdinalsBetween(projectId, currentOrdinal, newOrdinal);
+        } else if (newOrdinal > currentOrdinal) {
+            taskStateRepository.decrementOrdinalsBetween(projectId, currentOrdinal, newOrdinal);
+        }
 
+        taskState.setOrdinal(newOrdinal);
+        taskStateRepository.saveAndFlush(taskState);
 
-        // обновить порядковый номер у других таск стейтов
-
-
-        return null;
+        return taskStateDtoFactory.makeTaskStateDto(taskState);
     }
-
 
 }
