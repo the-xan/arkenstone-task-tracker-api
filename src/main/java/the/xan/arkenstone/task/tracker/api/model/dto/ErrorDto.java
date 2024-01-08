@@ -1,4 +1,4 @@
-package the.xan.arkenstone.task.tracker.api.exceptions;
+package the.xan.arkenstone.task.tracker.api.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;

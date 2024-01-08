@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
-import the.xan.arkenstone.task.tracker.api.exceptions.ErrorDto;
+import the.xan.arkenstone.task.tracker.api.model.dto.ErrorDto;
 
 import java.util.Map;
 

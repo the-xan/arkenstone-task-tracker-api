@@ -1,4 +1,4 @@
-package the.xan.arkenstone.task.tracker.api.services;
+package the.xan.arkenstone.task.tracker.api.services.interfaces;
 
 
 import the.xan.arkenstone.task.tracker.api.model.dto.AskDto;

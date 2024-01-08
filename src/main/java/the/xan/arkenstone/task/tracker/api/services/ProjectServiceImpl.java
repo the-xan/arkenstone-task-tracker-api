@@ -7,6 +7,7 @@ import the.xan.arkenstone.task.tracker.api.model.dto.AskDto;
 import the.xan.arkenstone.task.tracker.api.model.dto.ProjectDto;
 import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
 import the.xan.arkenstone.task.tracker.api.model.factories.ProjectDtoFactory;
+import the.xan.arkenstone.task.tracker.api.services.interfaces.ProjectService;
 import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
 import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
 
@@ -20,11 +21,11 @@ import java.util.stream.Stream;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    final ProjectDtoFactory projectDtoFactory;
+    private final ProjectDtoFactory projectDtoFactory;
 
-    final ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
-    final ControllerHelper controllerHelper;
+    private final ControllerHelper controllerHelper;
 
     @Autowired
     public ProjectServiceImpl(ProjectDtoFactory projectDtoFactory,
