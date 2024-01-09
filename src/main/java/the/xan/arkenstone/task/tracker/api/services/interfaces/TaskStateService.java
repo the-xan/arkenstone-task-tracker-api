@@ -1,5 +1,6 @@
 package the.xan.arkenstone.task.tracker.api.services.interfaces;
 
+import the.xan.arkenstone.task.tracker.api.model.dto.AskDto;
 import the.xan.arkenstone.task.tracker.api.model.dto.TaskStateDto;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public interface TaskStateService {
 
     TaskStateDto updateTaskStateOrdinal(Long projectId,Long taskStateId,Integer newOrdinal);
 
-    TaskStateDto deleteTaskState(Long projectId,Long taskStateId);
+    AskDto deleteTaskState(Long projectId, Long taskStateId);
 
 }

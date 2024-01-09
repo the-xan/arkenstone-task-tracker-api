@@ -1,10 +1,12 @@
 package the.xan.arkenstone.task.tracker.api.services;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import the.xan.arkenstone.task.tracker.api.controllers.helpers.ControllerHelper;
 import the.xan.arkenstone.task.tracker.api.exceptions.BadRequestException;
 import the.xan.arkenstone.task.tracker.api.exceptions.NotFoundException;
+import the.xan.arkenstone.task.tracker.api.model.dto.AskDto;
 import the.xan.arkenstone.task.tracker.api.model.dto.TaskStateDto;
 import the.xan.arkenstone.task.tracker.api.model.factories.TaskStateDtoFactory;
 import the.xan.arkenstone.task.tracker.api.services.interfaces.TaskStateService;
@@ -20,7 +22,6 @@ import java.util.stream.Stream;
 
 @Service
 public class TaskStateServiceImpl implements TaskStateService {
-
 
     private final TaskStateDtoFactory taskStateDtoFactory;
 
@@ -124,8 +125,51 @@ public class TaskStateServiceImpl implements TaskStateService {
         return taskStateDtoFactory.makeTaskStateDto(taskState);
     }
 
+    public TaskStateDto renameTaskState(Long projectId, Long taskStateId, String taskStateName) {
+
+        if (taskStateName.isBlank()) {
+            throw new BadRequestException("New task state name can`t be null!");
+        }
+
+        ProjectEntity project = controllerHelper.getProjectOrThrowException(projectId);
+
+        TaskStateEntity taskState = project.getTaskStates()
+                .stream()
+                .filter(sameTaskState -> Objects.equals(sameTaskState.getId(), taskStateId))
+                .findAny()
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Project with \"%s\" id, doesn`t contains task state with \"%s\" id",
+                                        projectId, taskStateId))
+                );
+
+        taskState.setName(taskStateName);
+
+        taskStateRepository.saveAndFlush(taskState);
+
+        return taskStateDtoFactory.makeTaskStateDto(taskState);
+    }
+
+
+
     @Override
-    public TaskStateDto deleteTaskState(Long projectId, Long taskStateId) {
-        return null;
+    public AskDto deleteTaskState(Long projectId, Long taskStateId) {
+
+        ProjectEntity project = controllerHelper.getProjectOrThrowException(projectId);
+
+        TaskStateEntity taskState = project.getTaskStates()
+                .stream()
+                .filter(sameTaskState -> Objects.equals(sameTaskState.getId(), taskStateId))
+                .findAny()
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Project with \"%s\" id, doesn`t contains task state with \"%s\" id",
+                                        projectId, taskStateId))
+                );
+
+        taskStateRepository.deleteById(taskState.getId());
+        taskStateRepository.decrementOrdinalsGreaterThan(projectId, taskState.getOrdinal());
+
+        return AskDto.makeDefault(true);
     }
 }
