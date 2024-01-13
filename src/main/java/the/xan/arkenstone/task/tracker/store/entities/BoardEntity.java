@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "projects")
+@Table(name = "boards")
 public class BoardEntity {
 
     @Id
@@ -32,7 +32,7 @@ public class BoardEntity {
     Instant createdAt = Instant.now();
 
     @Builder.Default
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @JoinColumn(name = "board_id", referencedColumnName = "id")
     @OneToMany(fetch = FetchType.LAZY)
     List<ColumnEntity> columns = new ArrayList<>();
 

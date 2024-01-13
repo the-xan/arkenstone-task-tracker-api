@@ -14,25 +14,25 @@ import java.util.Optional;
 @RestController
 public class ColumnController {
 
-    private final ColumnServiceImpl taskStateService;
+    private final ColumnServiceImpl columnService;
 
     private final static String GET_COLUMNS = "/api/boards/{board_id}/columns";
     private final static String CREATE_COLUMN = "/api/boards/{board_id}/columns";
-    private final static String EDIT_COLUMN_ORDINAL = "/api/boards/{board_id}/columns/{column_id}";
+    private final static String EDIT_COLUMN_ORDINAL = "/api/boards/{board_id}/columns/{column_id}/ordinal";
     private final static String DELETE_COLUMN = "/api/boards/{board_id}/columns/{column_id}";
-    private final static String EDIT_COLUMN_NAME = "/api/boards/{board_id}/columns/{column_id}";
+    private final static String EDIT_COLUMN_NAME = "/api/boards/{board_id}/columns/{column_id}/name";
 
     @GetMapping(GET_COLUMNS)
     public List<ColumnDto> getTaskStates(@PathVariable(name = "board_id") Long boardId,
                                          @RequestParam(name = "column_id", required = false) Optional<Long> optionalTaskStateId) {
-        return taskStateService
+        return columnService
                 .getColumns(boardId, optionalTaskStateId);
     }
 
     @PostMapping(CREATE_COLUMN)
     public ColumnDto createTaskState(@PathVariable(value = "board_id") Long boardId,
                                      @RequestParam(name = "column_name") String columnName) {
-        return taskStateService
+        return columnService
                 .createColumn(boardId, columnName);
     }
 
@@ -41,17 +41,17 @@ public class ColumnController {
     public ColumnDto updateTaskStateOrdinal(@PathVariable(value = "board_id") Long boardId,
                                             @PathVariable(value = "column_id") Long columnId,
                                             @RequestParam(name = "column_ordinal") Integer newOrdinal) {
-        return taskStateService
+        return columnService
                 .updateColumnOrdinal(boardId, columnId, newOrdinal);
     }
 
 
     @PatchMapping (EDIT_COLUMN_NAME)
-    public ColumnDto updateTaskStateName(@PathVariable(value = "board_id") Long boardId,
-                                         @PathVariable(value = "column_id") Long columnId,
-                                         @RequestParam(name = "task_state_name") String taskStateName) {
-        return taskStateService
-                .renameColumn(boardId,columnId,taskStateName);
+    public ColumnDto updateColumnName(@PathVariable(value = "board_id") Long boardId,
+                                      @PathVariable(value = "column_id") Long columnId,
+                                      @RequestParam(name = "column_name") String columnName) {
+        return columnService
+                .renameColumn(boardId,columnId, columnName);
     }
 
 
@@ -59,7 +59,7 @@ public class ColumnController {
     @DeleteMapping (DELETE_COLUMN)
     public AskDto deleteTaskState(@PathVariable(value = "board_id") Long boardId,
                                  @PathVariable(value = "column_id") Long columnId) {
-        return taskStateService
+        return columnService
                 .deleteColumn(boardId, columnId);
     }
 }
