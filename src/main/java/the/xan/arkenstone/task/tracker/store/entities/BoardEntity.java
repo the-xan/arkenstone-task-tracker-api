@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -14,26 +15,25 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "task_state")
-public class TaskStateEntity {
+@Table(name = "projects")
+public class BoardEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
-
-    int ordinal;
 
     //@Column(unique = true)
     String name;
 
     @Builder.Default
+    Instant updatedAt = Instant.now();
+
+    @Builder.Default
     Instant createdAt = Instant.now();
 
-    @ManyToOne
-    ProjectEntity project;
-
-    @JoinColumn(name = "task_state_id", referencedColumnName = "id")
     @Builder.Default
-    @OneToMany
-    List<TaskEntity> tasks = new ArrayList<>();
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.LAZY)
+    List<ColumnEntity> columns = new ArrayList<>();
 
 }

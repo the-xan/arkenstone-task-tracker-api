@@ -6,8 +6,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import the.xan.arkenstone.task.tracker.api.exceptions.NotFoundException;
-import the.xan.arkenstone.task.tracker.store.entities.ProjectEntity;
-import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
+import the.xan.arkenstone.task.tracker.store.entities.BoardEntity;
+import the.xan.arkenstone.task.tracker.store.repositories.BoardRepository;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -15,10 +15,10 @@ import the.xan.arkenstone.task.tracker.store.repositories.ProjectRepository;
 @Transactional
 public class ControllerHelper {
 
-    ProjectRepository projectRepository;
+    BoardRepository boardRepository;
 
-    public ProjectEntity getProjectOrThrowException(Long projectId) {
-        return projectRepository
+    public BoardEntity getBoardOrThrowException(Long projectId) {
+        return boardRepository
                 .findById(projectId)
                 .orElseThrow(() ->
                         new NotFoundException(

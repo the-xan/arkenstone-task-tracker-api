@@ -13,7 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
